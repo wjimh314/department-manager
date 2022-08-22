@@ -1,13 +1,12 @@
 /*CREATING DATABASE FOR DEPARTMENTS*/
 
-DROP DATABASE IF EXISTS employees_db;
-CREATE DATABASE employees_db;
-USE employees_db;
+DROP DATABASE IF EXISTS et_db;
+CREATE DATABASE et_db;
+USE et_db;
 
-CREATE TABLE departments(
+CREATE Table departments(
     id INT AUTO_INCREMENT PRIMARY KEY,
     department_name VARCHAR(100)
-
 );
 
 CREATE TABLE roles(
@@ -17,14 +16,14 @@ CREATE TABLE roles(
     salary DECIMAL,
     FOREIGN KEY (department_id) REFERENCES  departments(id) ON DELETE CASCADE
 );
-
-/*INSERT INTO employees(
+CREATE TABLE employees(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    first_Name VARCHAR(30),
-    last_Name VARCHAR(30),
+    first_name VARCHAR(30),
+    last_name VARCHAR(30),
     role_id INT,
     department_id INT,
     salary DECIMAL,
-    manager_id INT
+    manager_id INT);
+    /*FOREIGN KEY (department_id) REFERENCES  department(id) ON DELETE CASCADE
 );
 
