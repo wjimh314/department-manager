@@ -15,4 +15,4 @@ VALUES ( "sales lead",1,100000),
        ("lawyer",4,120000),
     ("legal team leader",4,150000);
 
-/*INSERT INTO employees(first_name,last_name,role_id,manager_id)
+INSERT INTO employees(first_name,last_name,role_id,manager_id)
