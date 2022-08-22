@@ -7,6 +7,7 @@ USE employees_db;
 CREATE TABLE departments(
     id INT AUTO_INCREMENT PRIMARY KEY,
     department_name VARCHAR(100)
+
 );
 
 CREATE TABLE roles(
@@ -17,10 +18,13 @@ CREATE TABLE roles(
     FOREIGN KEY (department_id) REFERENCES  departments(id) ON DELETE CASCADE
 );
 
-CREATE TABLE employees(
+/*INSERT INTO employees(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    firstname VARCHAR(30),
-    last_name VARCHAR(30),
+    first_Name VARCHAR(30),
+    last_Name VARCHAR(30),
     role_id INT,
+    department_id INT,
+    salary DECIMAL,
     manager_id INT
 );
+
