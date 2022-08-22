@@ -1,15 +1,16 @@
-INSERT INTO department(id, department_name)
-VALUES ("1",sales),
-       ("2",Engineering),
-       ("3",fiance),
-       ("4",legal),
+USE employees_db;
+INSERT INTO departments( department_name)
+VALUES ("sales"),
+       ("Engineering"),
+       ("fiance"),
+       ("legal");
 
-INSERT roles(id,title,department,salary,table)
-VALUES ("1", sales lead,sales,100000),
-       ("2",sales person,sales,80000),
-       ("3",lead Engineer,Engineer,120000),
-       ("4",software Engineer,Engineering,130000),
-       ("5",accountant manager,fiance,1000000),
-       ("6",accountant,fiance,100000),
-       ("7",lawyer,legal,120000),
-    ("8",legal team leader,150000),
+INSERT roles(title,department_id,salary)
+VALUES ( "sales lead",1,100000),
+       ("sales person",1,80000),
+       ("lead Engineer",2,120000),
+       ("software Engineer",2,130000),
+       ("accountant manager",3,1000000),
+       ("accountant",3,100000),
+       ("lawyer",4,120000),
+    ("legal team leader",4,150000);
