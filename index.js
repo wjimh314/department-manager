@@ -86,7 +86,7 @@ startPrompts = () => {
 		});
 };
 
-console.table(viewAllDepartments);
+//console.table(viewAllDepartments);
 
 function startPrompts() {
 	inquirer.prompt(questions).then((answers) => {
