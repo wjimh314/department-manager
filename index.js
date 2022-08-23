@@ -1,8 +1,17 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
-const PORT = process.env.PORT || 3001;
+const consoleTable = require("console.table");
+const util = require("util");
 
-inquirer.prompt([
+let connection = mysql.createConnection({
+	host: "localhost",
+	port: 3306,
+	user: "root",
+	password: "tothetop",
+	database: "et_db",
+});
+
+const questions = [
 	{
 		type: "list",
 		name: "options",
@@ -17,7 +26,7 @@ inquirer.prompt([
 			"update an employee role",
 		],
 	},
-]);
+];
 
 function startPrompts() {
 	inquirer.prompt(questions);
