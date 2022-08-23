@@ -1,4 +1,4 @@
-USE employees_db;
+USE et_db;
 INSERT INTO departments( department_name)
 VALUES ("sales"),
        ("Engineering"),
@@ -16,4 +16,11 @@ VALUES ( "sales lead",1,100000),
     ("legal team leader",4,150000);
 
 INSERT INTO employees(first_name,last_name,role_id,manager_id)
-VALUES ("JOHN","DOE",1,Salesperson,1,80000);
+VALUES ("JOHN","DOE",1,1,);
+       ("JOHN","SMITH",2,1,);
+       ("BOB","DOE",3,NULL);
+       ("STEVE","DOE",4,3);
+       ("JAKE","SMITH",5,NULL);
+       ("ROB","SMITH",6,5);
+       ("MIKE","DOE",7,8);
+       ("JOE","SMITH",8,NULL);
