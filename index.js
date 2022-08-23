@@ -3,13 +3,16 @@ const mysql = require("mysql2");
 const consoleTable = require("console.table");
 const util = require("util");
 
-let connection = mysql.createConnection({
-	host: "localhost",
-	port: 3306,
-	user: "root",
-	password: "tothetop",
-	database: "et_db",
-});
+let connection = mysql.createConnection(
+	{
+		host: "localhost",
+		port: 3306,
+		user: "root",
+		password: "tothetop",
+		database: "et_db",
+	},
+	console.log(`Connected to the et_db; database.`)
+);
 
 const questions = [
 	{
@@ -24,6 +27,7 @@ const questions = [
 			" add a role",
 			"add an employee",
 			"update an employee role",
+			"exit",
 		],
 	},
 ];
