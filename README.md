@@ -20,9 +20,10 @@ npm console.table - to format tables
 
 node index.js
 
-github:
+github: https://github.com/wjimh314/employeetracker
 
 Live walk through:
+https://drive.google.com/file/d/1dcZt5KKAjKz6vPqvY9JIIBU9FvEV0_4B/view
 
 ## Credits
 
