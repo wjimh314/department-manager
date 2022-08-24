@@ -25,7 +25,7 @@ startTracker = () => {
 				choices: [
 					"view all departments",
 					"view all roles",
-					"view all employees",
+					"view all employee",
 					"add a department",
 					" add a role",
 					"add an employee",
@@ -35,64 +35,84 @@ startTracker = () => {
 			},
 		])
 		.then((response) => {
+			console.log(response.options);
 			switch (response.options) {
-				case "View all departments":
-					viewAllDepartments("SELECT * FROM departments");
+				case "view all departments":
+					viewAllDepartments();
 					break;
-				case "View all roles":
+				case "view all roles":
 					viewAllRoles();
 					break;
-				case "View all employees":
-					viewAllEmployees();
+				case "view all employee":
+					viewAllEmployee();
 					break;
-				case "View all employees by manager":
+				case "view all employees by manager":
 					viewAllEmployeesByManager();
 					break;
-				case "Add a department":
+				case "add a department":
 					addADepartment();
 					break;
-				case "Add a role":
+				case "add a role":
 					addARole();
 					break;
-				case "Add an employee":
+				case "add an employee":
 					addAnEmployee();
 					break;
-				case "Update employee's role":
+				case "update employee's role":
 					updateEmployeeRole();
 					break;
-				case "Update employee's manager":
+				case "update employee's manager":
 					updateEmployeesManager();
 					break;
-				case "Remove a department":
+				case "remove a department":
 					removeADepartment();
 					break;
-				case "Remove a role":
+				case "remove a role":
 					removeARole();
 					break;
-				case "Remove an employee":
+				case "remove an employee":
 					removeAnEmployee();
 					break;
-				case "View total salary of department":
+				case "view total salary of department":
 					viewDepartmentSalary();
 					break;
-				case "Exit program":
+				case "exit":
 					connection.end();
 					console.log(
 						"\n You have exited the employee management program. Thanks for using! \n"
 					);
 					return;
 				default:
+					console.log("no match found");
 					break;
 			}
 		});
 
 	viewAllDepartments = () => {
+		console.log("view all departments");
 		connection.query(`SELECT * FROM departments `, (err, res) => {
 			if (err) throw err;
 			console.table("\n", res, "\n");
-			startApp();
+			console.log(res);
 		});
+		startTracker();
 	};
+	viewAllRoles = () => {
+		console.log("working");
+		connection.query(`SELECT * FROM roles `, (err, res) => {
+			if (err) throw err;
+			console.table("\n", res, "\n");
+		});
+		startTracker();
+	};
+};
+viewAllEmployee = () => {
+	console.log("view all employee");
+	connection.query(`SELECT * FROM employee`, (err, res) => {
+		if (err) throw err;
+		console.table("\n", res, "\n");
+	});
+	startTracker();
 };
 
 startTracker();
