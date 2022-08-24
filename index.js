@@ -35,7 +35,7 @@ startTracker = () => {
 			},
 		])
 		.then((response) => {
-			switch (options.response) {
+			switch (response.options) {
 				case "View all departments":
 					viewAllDepartments("SELECT * FROM departments");
 					break;
@@ -80,27 +80,19 @@ startTracker = () => {
 					console.log(
 						"\n You have exited the employee management program. Thanks for using! \n"
 					);
-
+					return;
+				default:
 					break;
 			}
 		});
 
 	viewAllDepartments = () => {
-		connection.query(
-			`SELECT * FROM departments ORDER BY department_id ;`,
-			(err, res) => {
-				if (err) throw err;
-				console.table(results);
-				startApp();
-			}
-		);
-	};
-
-	viewAllRoles = () => {
-		connection.query(`SELECT * FROM employees ;`, (err, res) => {
+		connection.query(`SELECT * FROM departments `, (err, res) => {
 			if (err) throw err;
-			console.table(results);
+			console.table("\n", res, "\n");
 			startApp();
 		});
 	};
 };
+
+startTracker();
