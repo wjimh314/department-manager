@@ -15,13 +15,13 @@ VALUES ( "sales lead",1,100000),
        ("lawyer",4,120000),
     ("legal team leader",4,150000);
 
-INSERT INTO employee(first_name,last_name,role_id,manager_id)
-VALUES ("JOHN","DOE",1,1);
-       ("JOHN","SMITH",2,1);
-       ("BOB","DOE",3,NULL);
-       ("STEVE","DOE",4,3);
-       ("JAKE","SMITH",5,NULL);
-       ("ROB","SMITH",6,5);
-       ("MIKE","DOE",7,8);
-       ("JOE","SMITH",8,NULL);
-       console.table(employee)
+INSERT INTO employee(first_name,last_name,role_id,manager_iSHOW d)
+VALUES ("JOHN","DOE",1,1),
+       ("JOHN","SMITH",2,1),
+       ("BOB","DOE",3,NULL),
+       ("STEVE","DOE",4,3),
+       ("JAKE","SMITH",5,NULL),
+       ("ROB","SMITH",6,5),
+       ("MIKE","DOE",7,8),
+       ("JOE","SMITH",8,NULL)
+       

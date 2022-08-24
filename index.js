@@ -16,87 +16,91 @@ let connection = mysql.createConnection(
 console.table("The Employee Tracker");
 
 startTracker = () => {
-	inquirer.prompt([
-		{
-			type: "list",
-			name: "options",
-			message: "what would you like to do?",
-			choices: [
-				"view all departments",
-				"view all roles",
-				"view all employees",
-				"add a department",
-				" add a role",
-				"add an employee",
-				"update an employee role",
-				"exit",
-			],
-		},
-	]);
-	//.then((response) => {
-	switch (options.response) {
-		case "View all departments":
-			viewAllDepartments("SELECT * FROM departments");
-			break;
-		case "View all roles":
-			viewAllRoles();
-			break;
-		case "View all employees":
-			viewAllEmployees();
-			break;
-		case "View all employees by manager":
-			viewAllEmployeesByManager();
-			break;
-		case "Add a department":
-			addADepartment();
-			break;
-		case "Add a role":
-			addARole();
-			break;
-		case "Add an employee":
-			addAnEmployee();
-			break;
-		case "Update employee's role":
-			updateEmployeeRole();
-			break;
-		case "Update employee's manager":
-			updateEmployeesManager();
-			break;
-		case "Remove a department":
-			removeADepartment();
-			break;
-		case "Remove a role":
-			removeARole();
-			break;
-		case "Remove an employee":
-			removeAnEmployee();
-			break;
-		case "View total salary of department":
-			viewDepartmentSalary();
-			break;
-		case "Exit program":
-			connection.end();
-			console.log(
-				"\n You have exited the employee management program. Thanks for using! \n"
-			);
+	inquirer
+		.prompt([
+			{
+				type: "list",
+				name: "options",
+				message: "what would you like to do?",
+				choices: [
+					"view all departments",
+					"view all roles",
+					"view all employees",
+					"add a department",
+					" add a role",
+					"add an employee",
+					"update an employee role",
+					"exit",
+				],
+			},
+		])
+		.then((response) => {
+			switch (options.response) {
+				case "View all departments":
+					viewAllDepartments("SELECT * FROM departments");
+					break;
+				case "View all roles":
+					viewAllRoles();
+					break;
+				case "View all employees":
+					viewAllEmployees();
+					break;
+				case "View all employees by manager":
+					viewAllEmployeesByManager();
+					break;
+				case "Add a department":
+					addADepartment();
+					break;
+				case "Add a role":
+					addARole();
+					break;
+				case "Add an employee":
+					addAnEmployee();
+					break;
+				case "Update employee's role":
+					updateEmployeeRole();
+					break;
+				case "Update employee's manager":
+					updateEmployeesManager();
+					break;
+				case "Remove a department":
+					removeADepartment();
+					break;
+				case "Remove a role":
+					removeARole();
+					break;
+				case "Remove an employee":
+					removeAnEmployee();
+					break;
+				case "View total salary of department":
+					viewDepartmentSalary();
+					break;
+				case "Exit program":
+					connection.end();
+					console.log(
+						"\n You have exited the employee management program. Thanks for using! \n"
+					);
 
-			break;
-	}
+					break;
+			}
+		});
+
+	viewAllDepartments = () => {
+		connection.query(
+			`SELECT * FROM departments ORDER BY department_id ;`,
+			(err, res) => {
+				if (err) throw err;
+				console.table(results);
+				startApp();
+			}
+		);
+	};
+
+	viewAllRoles = () => {
+		connection.query(`SELECT * FROM employees ;`, (err, res) => {
+			if (err) throw err;
+			console.table(results);
+			startApp();
+		});
+	};
 };
-
-//console.table(viewAllDepartments);
-
-//function startPrompts() {
-//	inquirer.prompt(questions).then((answers) => {
-//		function startPrompts() {
-//			inquirer.prompt(questions).then((answers) => {
-//				connection
-//					.promise()
-//					.query("SELECT department.id, department.name FROM department");
-//			});
-//		}
-//		console.table(answers);
-//	});
-//}
-
-startTracker();
