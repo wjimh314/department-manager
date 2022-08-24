@@ -115,4 +115,27 @@ viewAllEmployee = () => {
 	startTracker();
 };
 
+addADepartment = () => {
+	inquirer
+		.prompt([
+			{
+				name: "newDepartment",
+				type: "input",
+				message: "department you would like to add?",
+			},
+		])
+		.then((response) => {
+			connection.query(
+				`INSERT INTO department SET ?`,
+				{
+					department_name: response.newDept,
+				},
+				(err, res) => {
+					//console.log(`success!`);
+					startTracker();
+				}
+			);
+		});
+};
+
 startTracker();
