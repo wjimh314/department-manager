@@ -24,3 +24,4 @@ VALUES ("JOHN","DOE",1,1,);
        ("ROB","SMITH",6,5);
        ("MIKE","DOE",7,8);
        ("JOE","SMITH",8,NULL);
+       console.table(employees)
