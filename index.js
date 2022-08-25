@@ -55,7 +55,7 @@ startTracker = () => {
 				case "add an employee":
 					addAnEmployee();
 					break;
-				case "update employee's role":
+				case "update an employee role":
 					updateEmployeeRole();
 					break;
 				case "exit":
@@ -227,49 +227,52 @@ updateEmployeeRole = () => {
 				value: role.id,
 			};
 		});
-		connection.query(`SELECT * FROM employee ORDER first_name;`, (err, res) => {
-			if (err) throw err;
-			let employee = res.map((employee) => {
-				//console.log(res);
-				return {
-					name: employee.first_name + " " + employee.last_name,
-					value: employee.id,
-				};
-			});
-
-			inquirer
-				.prompt([
-					{
-						name: "employee",
-						type: "list",
-						message: "which employee would you like to update",
-						choices: employee,
-					},
-					{
-						name: "newRole",
-						type: "list",
-						message: "what is the new role?",
-						choices: roles,
-					},
-				])
-				.then((response) => {
-					connection.query(
-						`update employee SET ? WHERE ?`,
-						[
-							{
-								role_id: response.newRole,
-							},
-							{
-								employee_id: response.employee,
-							},
-						],
-						(err, res) => {
-							if (err) throw err;
-							startTracker();
-						}
-					);
+		connection.query(
+			`SELECT * FROM employee ORDER  BY first_name;`,
+			(err, res) => {
+				//if (err) throw err;
+				let employee = res.map((employee) => {
+					//console.log(res);
+					return {
+						name: employee.first_name + " " + employee.last_name,
+						value: employee.id,
+					};
 				});
-		});
+
+				inquirer
+					.prompt([
+						{
+							name: "employee",
+							type: "list",
+							message: "which employee would you like to update",
+							choices: employee,
+						},
+						{
+							name: "newRole",
+							type: "list",
+							message: "what is the new role?",
+							choices: roles,
+						},
+					])
+					.then((response) => {
+						connection.query(
+							`update employee SET ? WHERE ?`,
+							[
+								{
+									role_id: response.newRole,
+								},
+								{
+									id: response.employee,
+								},
+							],
+							(err, res) => {
+								//if (err) throw err;
+								startTracker();
+							}
+						);
+					});
+			}
+		);
 	});
 };
 
