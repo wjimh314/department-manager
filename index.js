@@ -126,16 +126,60 @@ addADepartment = () => {
 		])
 		.then((response) => {
 			connection.query(
-				`INSERT INTO department SET ?`,
+				`INSERT INTO departments SET ?`,
 				{
-					department_name: response.newDept,
+					department_name: response.newDepartment,
 				},
 				(err, res) => {
-					//console.log(`success!`);
+					console.log("${response.newDepartment}");
 					startTracker();
 				}
 			);
 		});
+};
+
+AddARole = () => {
+	connection.query("SELECT * FROM departments;", (err, res) => {
+		if (err) throw err;
+		let departments = res.map((departments) => ({
+			name: departments.department_name,
+			values: departments.department_id,
+		}));
+		inquirer
+			.prompt([
+				{
+					name: "title",
+					type: "input",
+					message: "what role would you like to add",
+				},
+				{
+					name: "salary",
+					type: "input",
+					message: "how much do you want to pay for this role?",
+				},
+				{
+					name: "departmentName",
+					type: "list",
+					message: "what department will this be added to?",
+					choices: departments,
+				},
+			])
+			.then((response) => {
+				connection.query(
+					"INSERT INTO roles SET ?",
+					{
+						title: response.title,
+						salary: response.salary,
+						department_id: response.department_name,
+					},
+					(err, res) => {
+						if (err) throw err;
+						console.log("${response.title}");
+						startTracker();
+					}
+				);
+			});
+	});
 };
 
 startTracker();
