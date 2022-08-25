@@ -23,7 +23,7 @@ node index.js
 github: https://github.com/wjimh314/employeetracker
 
 Live walk through:
-https://drive.google.com/file/d/1dcZt5KKAjKz6vPqvY9JIIBU9FvEV0_4B/view
+https://drive.google.com/file/d/1AAMZIUDuY2XqQ_yjQg7vM-ThULjhlWmT/view
 
 ## Credits
 
@@ -34,5 +34,6 @@ William Hart
 With this project,
 
 -ability to navigate through all employees, salary's, roles, departments and ID's.
+using query's i was able to link the mysql with the inquirer package to allow a streamline app.
 
 #
