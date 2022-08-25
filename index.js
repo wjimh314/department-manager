@@ -46,9 +46,6 @@ startTracker = () => {
 				case "view all employee":
 					viewAllEmployee();
 					break;
-				case "view all employees by manager":
-					viewAllEmployeesByManager();
-					break;
 				case "add a department":
 					addADepartment();
 					break;
@@ -61,26 +58,9 @@ startTracker = () => {
 				case "update employee's role":
 					updateEmployeeRole();
 					break;
-				case "update employee's manager":
-					updateEmployeesManager();
-					break;
-				case "remove a department":
-					removeADepartment();
-					break;
-				case "remove a role":
-					removeARole();
-					break;
-				case "remove an employee":
-					removeAnEmployee();
-					break;
-				case "view total salary of department":
-					viewDepartmentSalary();
-					break;
 				case "exit":
 					connection.end();
-					console.log(
-						"\n You have exited the employee management program. Thanks for using! \n"
-					);
+					console.log("\n Thanks for using! \n");
 					return;
 				default:
 					console.log("no match found");
@@ -235,6 +215,56 @@ addAnEmployee = () => {
 					}
 				);
 			});
+	});
+};
+
+updateEmployeeRole = () => {
+	connection.query(`SELECT * FROM roles;`, (err, res) => {
+		if (err) throw err;
+		let roles = res.map((role) => ({
+			name: role.title,
+			value: role.id,
+		}));
+		connection.query(`SELECT * FROM employee;`, (err, res) => {
+			if (err) throw err;
+			let employees = res.map((role) => ({
+				name: role.title,
+				value: role.id,
+			}));
+
+			inquirer
+				.prompt([
+					{
+						name: "employee",
+						type: "list",
+						message: "which employee would you like to update",
+						message: employees,
+					},
+					{
+						name: "newRole",
+						type: "list",
+						message: "what is the new role?",
+						choices: roles,
+					},
+				])
+				.then((response) => {
+					connection.query(
+						`update employee SET ? WHERE ?`,
+						[
+							{
+								role_id: response.newRole,
+							},
+							{
+								employee_id: response.employee,
+							},
+						],
+						(err, res) => {
+							if (err) throw err;
+							startTracker();
+						}
+					);
+				});
+		});
 	});
 };
 
