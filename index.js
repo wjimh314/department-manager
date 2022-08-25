@@ -207,7 +207,7 @@ addAnEmployee = () => {
 						manager_id: response.managerName,
 					},
 					(err, res) => {
-						if (err) throw err;
+						//if (err) throw err;
 						console.log(
 							`${response.firstName} ${response.lastName} was inserted into employee`
 						);
@@ -219,18 +219,23 @@ addAnEmployee = () => {
 };
 
 updateEmployeeRole = () => {
-	connection.query(`SELECT * FROM roles;`, (err, res) => {
-		if (err) throw err;
-		let roles = res.map((role) => ({
-			name: role.title,
-			value: role.id,
-		}));
-		connection.query(`SELECT * FROM employee;`, (err, res) => {
-			if (err) throw err;
-			let employees = res.map((role) => ({
+	connection.query(`SELECT * FROM roles ORDER BY title;`, (err, res) => {
+		//if (err) throw err;
+		let roles = res.map((role) => {
+			return {
 				name: role.title,
 				value: role.id,
-			}));
+			};
+		});
+		connection.query(`SELECT * FROM employee ORDER first_name;`, (err, res) => {
+			if (err) throw err;
+			let employee = res.map((employee) => {
+				//console.log(res);
+				return {
+					name: employee.first_name + " " + employee.last_name,
+					value: employee.id,
+				};
+			});
 
 			inquirer
 				.prompt([
@@ -238,7 +243,7 @@ updateEmployeeRole = () => {
 						name: "employee",
 						type: "list",
 						message: "which employee would you like to update",
-						message: employees,
+						choices: employee,
 					},
 					{
 						name: "newRole",
