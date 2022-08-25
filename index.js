@@ -27,7 +27,7 @@ startTracker = () => {
 					"view all roles",
 					"view all employee",
 					"add a department",
-					" add a role",
+					"add a role",
 					"add an employee",
 					"update an employee role",
 					"exit",
@@ -93,7 +93,7 @@ startTracker = () => {
 		connection.query(`SELECT * FROM departments `, (err, res) => {
 			if (err) throw err;
 			console.table("\n", res, "\n");
-			console.log(res);
+			//console.log(res);
 		});
 		startTracker();
 	};
@@ -138,13 +138,14 @@ addADepartment = () => {
 		});
 };
 
-AddARole = () => {
+addARole = () => {
 	connection.query("SELECT * FROM departments;", (err, res) => {
 		if (err) throw err;
 		let departments = res.map((departments) => ({
 			name: departments.department_name,
-			values: departments.department_id,
+			value: departments.id,
 		}));
+		console.log(departments);
 		inquirer
 			.prompt([
 				{
@@ -165,16 +166,71 @@ AddARole = () => {
 				},
 			])
 			.then((response) => {
+				console.log(response);
 				connection.query(
 					"INSERT INTO roles SET ?",
 					{
 						title: response.title,
 						salary: response.salary,
-						department_id: response.department_name,
+						department_id: response.departmentName,
 					},
 					(err, res) => {
 						if (err) throw err;
 						console.log("${response.title}");
+						startTracker();
+					}
+				);
+			});
+	});
+};
+
+addAnEmployee = () => {
+	connection.query("SELECT * FROM roles;", (err, res) => {
+		if (err) throw err;
+		let employeerole = res.map((role) => ({
+			name: role.title,
+			value: role.id,
+		}));
+		//console.log(departments);
+		inquirer
+			.prompt([
+				{
+					name: "firstName",
+					type: "input",
+					message: "new employees first name?",
+				},
+				{
+					name: "lastName",
+					type: "input",
+					message: "new employee last name?",
+				},
+				{
+					name: "title",
+					type: "list",
+					message: "what will their role be?",
+					choices: employeerole,
+				},
+				{
+					name: "managerName",
+					type: "input",
+					message: "what is the managers name?",
+				},
+			])
+			.then((response) => {
+				console.log(response);
+				connection.query(
+					"INSERT INTO employee SET ?",
+					{
+						first_name: response.firstName,
+						last_name: response.lastName,
+						role_id: response.title,
+						manager_id: response.managerName,
+					},
+					(err, res) => {
+						if (err) throw err;
+						console.log(
+							`${response.firstName} ${response.lastName} was inserted into employee`
+						);
 						startTracker();
 					}
 				);

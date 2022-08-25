@@ -2,7 +2,7 @@ USE et_db;
 INSERT INTO departments(department_name)
 VALUES ("sales"),
        ("Engineering"),
-       ("fiance"),
+       ("finance"),
        ("legal");
 
 INSERT INTO roles(title,department_id,salary)
